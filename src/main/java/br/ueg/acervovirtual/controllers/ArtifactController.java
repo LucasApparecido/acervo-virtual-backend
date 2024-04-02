@@ -6,9 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +18,18 @@ public class ArtifactController {
 
     @Autowired
     private ArtifactService service;
+
+    @PostMapping
+    @Operation(description = "End point para inclusão de artefato")
+    public ResponseEntity<Artifact> create (@RequestBody Artifact artifact ){
+        var artifactCreate = service.createArtifact(artifact);
+        return ResponseEntity.ok(artifactCreate);
+    }
+
+
     @GetMapping
     @Operation(description = "Lista todos os artefatos registrados")
-    public ResponseEntity<List<Artifact>> listALLArtifacts() {
+    public ResponseEntity<List<Artifact>> listAllArtifacts() {
         List<Artifact> artifactList = new ArrayList<>();
         try{
             artifactList = service.listALLArtifacts();
@@ -30,7 +37,6 @@ public class ArtifactController {
             e.printStackTrace();
             return ResponseEntity.status(400).build();
         }
-        return ResponseEntity.of(
-                Optional.ofNullable(artifactList));
+        return ResponseEntity.of(Optional.ofNullable(artifactList));
     }
 }
