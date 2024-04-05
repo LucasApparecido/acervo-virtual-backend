@@ -25,7 +25,6 @@ public class StudentController {
     @Autowired
     private StudentService service;
 
-    @Autowired
     private StudentMapper mapper;
 
     @PostMapping

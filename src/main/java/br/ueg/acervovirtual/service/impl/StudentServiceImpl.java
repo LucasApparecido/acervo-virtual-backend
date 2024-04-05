@@ -99,7 +99,7 @@ public class StudentServiceImpl implements StudentService {
         }
         Optional<Student> byRegisterNumber = repository.findByRegisterNumber(dado.getRegisterNumber());
         if(byRegisterNumber.isPresent()){
-            throw new BusinessLogicException(BusinessLogicError.REGISTER_NUMBER_DUPLICATED);
+            throw new BusinessLogicException("BusinessLogicError.REGISTER_NUMBER_DUPLICATED");
         }
 
     }

@@ -1,16 +1,18 @@
 package br.ueg.acervovirtual.service;
 
-import br.ueg.acervovirtual.repository.StudentRepository;
-import br.ueg.acervovirtual.model.Student;
+import br.ueg.acervovirtual.model.Artifact;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.time.LocalDate;
+import java.time.Month;
+
 
 @Component
 public class AppStartupRunner implements ApplicationRunner {
@@ -23,20 +25,29 @@ public class AppStartupRunner implements ApplicationRunner {
             LoggerFactory.getLogger(AppStartupRunner.class);
 
     @Autowired
-    private StudentRepository studentRepository;
+    private ArtifactService artifactService;
 
     public void initDados(){
         LOG.info("Inicio da execução do InitDados!");
         if(!this.ddlAuto.equalsIgnoreCase(CREATE_DROP)){
             return;
         }
-        Student student = Student.builder()
-                .registerNumber("230322001")
-                .name("Fulano da Silva")
-                .course("Sistemas de Informação")
-                .createdDate(LocalDate.now().minusDays(1))
+        Artifact artifact = Artifact.builder()
+                .pieceNumber("123456")
+                .pieceName("Peça 1")
+                .provenance("Proveniencia 1")
+                .collectorDonor("Coletor 1")
+                .familyTaxon("Familia 1")
+                .collectionYear(2021)
+                .locationInCollection("Localização 1")
+                .periodEpochAge("Periodo 1")
+                .collection("Coleção 1")
+                .pieceDescription("Descrição 1")
+                .status(true)
+                .tombingDate(LocalDate.of(2021, Month.JANUARY, 1))
+                .registrationDate(LocalDate.now())
                 .build();
-        this.studentRepository.save(student);
+        this.artifactService.save(artifact);
         LOG.info("Fim da execução");
     }
 

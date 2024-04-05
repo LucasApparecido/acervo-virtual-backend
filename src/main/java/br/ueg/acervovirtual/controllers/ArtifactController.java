@@ -1,5 +1,6 @@
 package br.ueg.acervovirtual.controllers;
 
+import br.ueg.acervovirtual.mapper.ArtifactMapper;
 import br.ueg.acervovirtual.model.Artifact;
 import br.ueg.acervovirtual.service.ArtifactService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -18,6 +19,9 @@ public class ArtifactController {
 
     @Autowired
     private ArtifactService service;
+
+    @Autowired
+    private ArtifactMapper mapper;
 
     @PostMapping
     @Operation(description = "End point para inclusão de artefato")

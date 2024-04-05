@@ -31,6 +31,9 @@ public class Artifact {
     @Column(name = "Numero_da_peca", length = 20, nullable = false)
     private String pieceNumber;
 
+    @Column(name = "Nome_da_Peca", length = 100, nullable = false)
+    private String pieceName;
+
     @Column(name = "Proveniencia", length = 100, nullable = false)
     private String provenance;
 
@@ -60,4 +63,7 @@ public class Artifact {
 
     @Column(name = "Data_de_tombamento", nullable = false)
     private LocalDate tombingDate;
+
+    @Column(name = "Data_de_cadastro", nullable = false)
+    private LocalDate registrationDate;
 }
