@@ -1,0 +1,13 @@
+
+c	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ï´ÖÓ
+h	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‡Ç•¥ýÿÿÿÿ
+c	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Š ÇÙ
+c	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(›®Í‡
+V
+java:S1854";Remove this useless assignment to local variable "builder".(³¿÷¿ýÿÿÿÿ
+G
+java:S1481",Remove this unused "builder" local variable.(³¿÷¿ýÿÿÿÿ
+P	java:S125 "<This block of commented-out lines of code should be removed.(ÄØ¬U
+V	java:S125("<This block of commented-out lines of code should be removed.(¤…– ÿÿÿÿÿ
+a
+java:S1128"FRemove this unused import 'org.springframework.stereotype.Controller'.(øŠ—Öùÿÿÿÿ
