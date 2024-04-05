@@ -1,12 +1,12 @@
 package br.ueg.acervovirtual.service;
 
 import br.ueg.acervovirtual.model.Artifact;
+import br.ueg.acervovirtual.repository.ArtifactRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -25,7 +25,7 @@ public class AppStartupRunner implements ApplicationRunner {
             LoggerFactory.getLogger(AppStartupRunner.class);
 
     @Autowired
-    private ArtifactService artifactService;
+    private ArtifactRepository artifactRepository;
 
     public void initDados(){
         LOG.info("Inicio da execução do InitDados!");
@@ -47,12 +47,12 @@ public class AppStartupRunner implements ApplicationRunner {
                 .tombingDate(LocalDate.of(2021, Month.JANUARY, 1))
                 .registrationDate(LocalDate.now())
                 .build();
-        this.artifactService.save(artifact);
+        this.artifactRepository.save(artifact);
         LOG.info("Fim da execução");
     }
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(ApplicationArguments args) {
         try {
             this.initDados();
         }catch (Exception e){
