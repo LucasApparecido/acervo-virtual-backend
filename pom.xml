@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.ueg.progweb1</groupId>
-	<artifactId>aula01</artifactId>
+	<artifactId>acervo-virtual</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>aula01</name>
 	<description>Projetot da aula01</description>
