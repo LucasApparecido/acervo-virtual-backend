@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -98,5 +99,11 @@ public class ArtifactController {
                     .body("Erro: desconhecido aconteceu:"+e.getMessage());
         }
         return ResponseEntity.ok(artifact);
+    }
+
+    @GetMapping(path = "/collectionYear")
+    @Operation(description = "Lista todos os artefatos por ano de coleta")
+    public ResponseEntity<List<Artifact>> listAllArtifactsByCollectionYear(){
+        return ResponseEntity.of(Optional.ofNullable(service.listAllArtifactsByCollectionYear()));
     }
 }

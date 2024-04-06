@@ -10,4 +10,6 @@ public interface ArtifactService {
         Artifact updateArtifact(Artifact artifact); // Atualiza um artefato existente
 
         Artifact getById(Long id); // Retorna um artefato pelo seu id
+
+        List<Artifact> listAllArtifactsByCollectionYear(); // Lista todos os artefatos por ano de coleta
 }

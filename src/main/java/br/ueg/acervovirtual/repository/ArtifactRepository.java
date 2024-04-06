@@ -12,5 +12,6 @@ import java.util.Optional;
 public interface ArtifactRepository extends JpaRepository<Artifact, Long> {
     Optional<Artifact> findByPieceNumber(String numberPiece);
 
-    //implementar uma query ou não
+    @Query("SELECT a FROM Artifact a ORDER BY a.collectionYear DESC")
+    List<Artifact> findAllArtifactsByCollectionYear();
 }

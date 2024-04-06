@@ -27,7 +27,6 @@ public class ArtifactServiceImpl implements ArtifactService {
     public Artifact createArtifact(Artifact data) {
         prepareToCreate(data);
         validateMandatoryFields(data);
-        validateBusinessLogic(data);
         validateBusinessLogicForInsert(data);
         return artifactRepository.save(data);
     }
@@ -36,7 +35,6 @@ public class ArtifactServiceImpl implements ArtifactService {
     public Artifact updateArtifact(Artifact dataToUpdate) {
         var dataDB = validateIdArtifactExists(dataToUpdate.getId());
         validateMandatoryFields(dataToUpdate);
-        validateBusinessLogic(dataToUpdate);
         validateBusinessLogicForUpdate(dataToUpdate);
         updateDataDBFromUpdate(dataToUpdate, dataDB);
         return artifactRepository.save(dataDB);
@@ -56,16 +54,47 @@ public class ArtifactServiceImpl implements ArtifactService {
         if (data.getPieceNumber() == null || data.getPieceNumber().isEmpty()) {
             throw new MandatoryException("Nome do artefato é obrigatório");
         }
+        if (data.getPieceName() == null || data.getPieceName().isEmpty()) {
+            throw new MandatoryException("Nome do artefato é obrigatório");
+        }
+        if (data.getPieceDescription() == null || data.getPieceDescription().isEmpty()) {
+            throw new MandatoryException("Descrição do artefato é obrigatório");
+        }
+        if (data.getProvenance() == null || data.getProvenance().isEmpty()) {
+            throw new MandatoryException("Proveniência do artefato é obrigatório");
+        }
+        if (data.getCollectorDonor() == null || data.getCollectorDonor().isEmpty()) {
+            throw new MandatoryException("Coletor/Doador do artefato é obrigatório");
+        }
+        if (data.getFamilyTaxon() == null || data.getFamilyTaxon().isEmpty()) {
+            throw new MandatoryException("Família/Taxonomia do artefato é obrigatório");
+        }
+        if (data.getCollectionYear() == null) {
+            throw new MandatoryException("Ano de coleta do artefato é obrigatório");
+        }
+        if (data.getLocationInCollection() == null || data.getLocationInCollection().isEmpty()) {
+            throw new MandatoryException("Localização no acervo do artefato é obrigatório");
+        }
+        if (data.getPeriodEpochAge() == null || data.getPeriodEpochAge().isEmpty()) {
+            throw new MandatoryException("Período/Época/Idade do artefato é obrigatório");
+        }
+        if (data.getCollection() == null || data.getCollection().isEmpty()) {
+            throw new MandatoryException("Coleção do artefato é obrigatório");
+        }
+        if (data.getStatus() == null) {
+            throw new MandatoryException("Status do artefato é obrigatório");
+        }
+        if (data.getTombingDate() == null) {
+            throw new MandatoryException("Data de tombamento do artefato é obrigatório");
+        }
     }
-
-    private void validateBusinessLogic(Artifact data) {}
 
     private void validateBusinessLogicForInsert(Artifact data) {
         if(Strings.isEmpty(data.getPieceNumber())){
             throw new BusinessLogicException(BusinessLogicError.MANDATORY_FIELD_NOT_FOUND);
         }
         Optional<Artifact> byNumberPiece = artifactRepository.findByPieceNumber(data.getPieceNumber());
-        if(byNumberPiece.isPresent()){
+        if(byNumberPiece.isPresent()) {
             throw new BusinessLogicException(BusinessLogicError.NUMBER_PIECE_DUPLICATED);
         }
     }
@@ -113,4 +142,9 @@ public class ArtifactServiceImpl implements ArtifactService {
         dataDB.setStatus(dataToUpdate.getStatus());
     }
 
+    @Override
+    public List<Artifact> listAllArtifactsByCollectionYear() {
+        Optional<List<Artifact>> byCollectionYear = Optional.ofNullable(artifactRepository.findAllArtifactsByCollectionYear());
+        return byCollectionYear.get();
+    }
 }
