@@ -3,7 +3,9 @@ package br.ueg.acervovirtual.mapper;
 import br.ueg.acervovirtual.model.Artifact;
 import br.ueg.acervovirtual.model.dtos.CreateArtifactDTO;
 import br.ueg.acervovirtual.model.dtos.UpdateArtifactDTO;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ArtifactMapper {
     public Artifact toModel(CreateArtifactDTO dto){
         Artifact a = new Artifact();

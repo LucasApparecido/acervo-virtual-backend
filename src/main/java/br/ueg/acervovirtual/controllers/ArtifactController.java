@@ -24,6 +24,7 @@ public class ArtifactController {
     @Autowired
     private ArtifactService service;
 
+    @Autowired
     private ArtifactMapper mapper;
 
     @PostMapping
