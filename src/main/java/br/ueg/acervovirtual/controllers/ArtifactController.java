@@ -106,4 +106,20 @@ public class ArtifactController {
     public ResponseEntity<List<Artifact>> listAllArtifactsByCollectionYear(){
         return ResponseEntity.of(Optional.ofNullable(service.listAllArtifactsByCollectionYear()));
     }
+
+    @DeleteMapping(path = "/{id}")
+    @Operation(description = "Deleta um artefato pelo seu id")
+    public ResponseEntity<Object> delete(@PathVariable("id") Long id){
+        try{
+            service.deleteArtifact(id);
+        }catch (DataException de){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Erro de dados ocorreu. Detalhe:"+de.getMessage());
+        }
+        catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Erro: desconhecido aconteceu:"+e.getMessage());
+        }
+        return ResponseEntity.ok().build();
+    }
 }

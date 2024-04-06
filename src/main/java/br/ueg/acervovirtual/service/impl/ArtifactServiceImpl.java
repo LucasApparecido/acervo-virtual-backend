@@ -147,4 +147,11 @@ public class ArtifactServiceImpl implements ArtifactService {
         Optional<List<Artifact>> byCollectionYear = Optional.ofNullable(artifactRepository.findAllArtifactsByCollectionYear());
         return byCollectionYear.get();
     }
+
+    @Override
+    public Artifact deleteArtifact(Long id) {
+        Artifact artifact = this.validateIdArtifactExists(id);
+        artifactRepository.delete(artifact);
+        return artifact;
+    }
 }
