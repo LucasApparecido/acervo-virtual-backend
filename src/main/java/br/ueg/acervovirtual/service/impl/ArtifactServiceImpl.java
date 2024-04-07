@@ -143,8 +143,8 @@ public class ArtifactServiceImpl implements ArtifactService {
     }
 
     @Override
-    public List<Artifact> listAllArtifactsByCollectionYear() {
-        Optional<List<Artifact>> byCollectionYear = Optional.ofNullable(artifactRepository.findAllArtifactsByCollectionYear());
+    public List<Artifact> getOrderByCollectionYear() {
+        Optional<List<Artifact>> byCollectionYear = Optional.ofNullable(artifactRepository.findOrderByCollectionYear());
         return byCollectionYear.get();
     }
 

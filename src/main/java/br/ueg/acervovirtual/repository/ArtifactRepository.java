@@ -14,5 +14,5 @@ public interface ArtifactRepository extends JpaRepository<Artifact, Long> {
     Optional<Artifact> findByPieceNumber(String numberPiece);
 
     @Query("SELECT a FROM Artifact a ORDER BY a.collectionYear DESC")
-    List<Artifact> findAllArtifactsByCollectionYear();
+    List<Artifact> findOrderByCollectionYear();
 }

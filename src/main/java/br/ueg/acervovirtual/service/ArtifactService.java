@@ -12,5 +12,5 @@ public interface ArtifactService {
 
         Artifact getById(Long id); // Retorna um artefato pelo seu id
 
-        List<Artifact> listAllArtifactsByCollectionYear(); // Lista todos os artefatos por ano de coleta
+        List<Artifact> getOrderByCollectionYear(); // Lista todos os artefatos por ano de coleta
 }

@@ -103,8 +103,8 @@ public class ArtifactController {
 
     @GetMapping(path = "/collectionYear")
     @Operation(description = "Lista todos os artefatos por ano de coleta")
-    public ResponseEntity<List<Artifact>> listAllArtifactsByCollectionYear(){
-        return ResponseEntity.of(Optional.ofNullable(service.listAllArtifactsByCollectionYear()));
+    public ResponseEntity<List<Artifact>> listOrderByCollectionYear(){
+        return ResponseEntity.of(Optional.ofNullable(service.getOrderByCollectionYear()));
     }
 
     @DeleteMapping(path = "/{id}")
