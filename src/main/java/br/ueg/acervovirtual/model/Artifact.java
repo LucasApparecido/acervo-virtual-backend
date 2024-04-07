@@ -28,7 +28,7 @@ public class Artifact {
     @Column(name = "Id", nullable = false)
     private Long id;
 
-    @Column(name = "Numero_da_peca", length = 20, nullable = false)
+    @Column(name = "Numero_da_peca", length = 50, nullable = false)
     private String pieceNumber;
 
     @Column(name = "Nome_da_Peca", length = 100, nullable = false)
@@ -46,13 +46,13 @@ public class Artifact {
     @Column(name = "Ano_de_Coleta", length = 4, nullable = false)
     private Integer collectionYear;
 
-    @Column(name = "Localizacao_no_Acervo", length = 20, nullable = false)
+    @Column(name = "Localizacao_no_Acervo", length = 50, nullable = false)
     private String locationInCollection;
 
     @Column(name = "Periodo_Epoca_Idade", length = 50, nullable = false)
     private String periodEpochAge;
 
-    @Column(name = "Colecao", length = 30, nullable = false)
+    @Column(name = "Colecao", length = 100, nullable = false)
     private String collection;
 
     @Column(name = "Descricao_da_Peca", length = 500)

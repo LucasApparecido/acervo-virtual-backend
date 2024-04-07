@@ -20,6 +20,7 @@ public class ArtifactMapper {
         a.setCollection(dto.getCollection());
         a.setPieceDescription(dto.getPieceDescription());
         a.setStatus(dto.getStatus());
+        a.setTombingDate(dto.getTombingDate());
         a.setRegistrationDate(dto.getRegistrationDate());
         return a;
     }
@@ -36,7 +37,8 @@ public class ArtifactMapper {
         a.setCollection(dto.getCollection());
         a.setPieceDescription(dto.getPieceDescription());
         a.setStatus(dto.getStatus());
-        a.setRegistrationDate(dto.getTombingDate());
+        a.setTombingDate(dto.getTombingDate());
+        a.setRegistrationDate(dto.getRegistrationDate());
         return a;
     }
 }

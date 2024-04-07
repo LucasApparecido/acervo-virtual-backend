@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface ArtifactRepository extends JpaRepository<Artifact, Long> {
+    @Query("SELECT a FROM Artifact a WHERE a.pieceNumber = :numberPiece")
     Optional<Artifact> findByPieceNumber(String numberPiece);
 
     @Query("SELECT a FROM Artifact a ORDER BY a.collectionYear DESC")

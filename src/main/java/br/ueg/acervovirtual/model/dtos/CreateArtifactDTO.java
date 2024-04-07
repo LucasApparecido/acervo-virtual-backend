@@ -45,5 +45,8 @@ public class CreateArtifactDTO {
     private Boolean Status;
 
     @Schema(description = "Data de Tombamento", example = "2021-09-01")
+    private LocalDate tombingDate;
+
+    @Schema(description = "Data de Registro", example = "2021-09-01")
     private LocalDate registrationDate;
 }

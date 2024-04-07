@@ -1,3 +1,7 @@
 
+¤
+java:S3655”"`Call "byCollectionYear.isPresent()" or "!byCollectionYear.isEmpty()" before accessing the value.(¼Îƒò8ÅµÓˆë1J$b250277e-11d4-49c2-a191-32f09ee45cff
 …
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ8˜í’Êê1J$69e4d5ef-5ba6-41ef-86b8-43d7da44ba1f
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ8˜í’Êê1J$87d3bb81-f85b-4bc6-9e80-6adc834f9190
+•
+java:S37765"RRefactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.(ªñã‡8ÕµÓˆë1J$621c786b-a3ce-43ad-9f94-d23656079689

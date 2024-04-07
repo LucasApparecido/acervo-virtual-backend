@@ -47,3 +47,7 @@ s
 Csrc/main/java/br/ueg/acervovirtual/model/dtos/UpdateStudentDTO.java,d\7\d7750607d79e92b0a24ed7af5c8cbe3deefa33ce
 Q
 !acervo-virtual-backend-master.iml,c\4\c414668085b8618d3de00a42f13fc471dcb22920
+t
+Dsrc/main/java/br/ueg/acervovirtual/model/dtos/UpdateArtifactDTO.java,b\3\b3382a217426dee8ea0d76acc840626220d3ba7c
+t
+Dsrc/main/java/br/ueg/acervovirtual/model/dtos/CreateArtifactDTO.java,3\5\35039f3964b1fd07432f72f8c85ec468bae4a3aa

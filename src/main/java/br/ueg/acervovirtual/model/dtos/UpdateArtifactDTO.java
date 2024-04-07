@@ -33,4 +33,6 @@ public class UpdateArtifactDTO {
     private Boolean Status;
 
     private LocalDate tombingDate;
+
+    private LocalDate registrationDate;
 }
