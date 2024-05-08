@@ -1,5 +1,8 @@
 package br.ueg.acervovirtual.controllers;
 
+import br.ueg.acervovirtual.mapper.GenericMapper;
+import br.ueg.acervovirtual.model.GenericModel;
+import br.ueg.acervovirtual.service.CrudService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
