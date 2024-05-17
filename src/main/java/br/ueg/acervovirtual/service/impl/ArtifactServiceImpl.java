@@ -57,9 +57,6 @@ public class ArtifactServiceImpl implements ArtifactService {
         if (data.getArtifactName() == null || data.getArtifactName().isEmpty()) {
             throw new MandatoryException("Nome do artefato é obrigatório");
         }
-        if (data.getArtifactDescription() == null || data.getArtifactDescription().isEmpty()) {
-            throw new MandatoryException("Descrição do artefato é obrigatório");
-        }
         if (data.getProvenance() == null || data.getProvenance().isEmpty()) {
             throw new MandatoryException("Proveniência do artefato é obrigatório");
         }
