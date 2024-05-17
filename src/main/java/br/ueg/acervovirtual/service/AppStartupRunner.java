@@ -33,8 +33,8 @@ public class AppStartupRunner implements ApplicationRunner {
             return;
         }
         Artifact artifact = Artifact.builder()
-                .pieceNumber("123456")
-                .pieceName("Peça 1")
+                .artifactNumber("123456")
+                .artifactName("Peça 1")
                 .provenance("Proveniencia 1")
                 .collectorDonor("Coletor 1")
                 .familyTaxon("Familia 1")
@@ -42,7 +42,7 @@ public class AppStartupRunner implements ApplicationRunner {
                 .locationInCollection("Localização 1")
                 .periodEpochAge("Periodo 1")
                 .collection("Coleção 1")
-                .pieceDescription("Descrição 1")
+                .artifactDescription("Descrição 1")
                 .status(true)
                 .tombingDate(LocalDate.of(2021, Month.JANUARY, 1))
                 .registrationDate(LocalDate.now())

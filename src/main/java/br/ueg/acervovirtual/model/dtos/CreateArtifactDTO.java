@@ -12,10 +12,10 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class CreateArtifactDTO {
    @Schema(description = "Número da peça",example = "22222")
-   private String pieceNumber;
+   private String artifactNumber;
 
     @Schema(description = "Nome da peça", example = "nome da peça")
-    private String pieceName;
+    private String artifactName;
 
     @Schema(description = "Proveniência", example = "proveniência")
     private String provenance;
@@ -39,7 +39,7 @@ public class CreateArtifactDTO {
     private String collection;
 
     @Schema(description = "Descrição da Peça", example = "descrição da peça")
-    private String pieceDescription;
+    private String artifactDescription;
 
     @Schema(description = "Status", example = "true")
     private Boolean Status;

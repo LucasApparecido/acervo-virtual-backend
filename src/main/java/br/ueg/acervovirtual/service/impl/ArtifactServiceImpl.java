@@ -33,7 +33,7 @@ public class ArtifactServiceImpl implements ArtifactService {
 
     @Override
     public Artifact updateArtifact(Artifact dataToUpdate) {
-        var dataDB = validateIdArtifactExists(dataToUpdate.getId());
+        var dataDB = validateIdArtifactExists(dataToUpdate.getArtifactId());
         validateMandatoryFields(dataToUpdate);
         validateBusinessLogicForUpdate(dataToUpdate);
         updateDataDBFromUpdate(dataToUpdate, dataDB);
@@ -46,18 +46,18 @@ public class ArtifactServiceImpl implements ArtifactService {
     }
 
     private void prepareToCreate(Artifact data) {
-        data.setId(null);
+        data.setArtifactId(null);
     }
 
     //Talvez um switch case com todos os campos, vale a duvida mais tarde com o professor
     private void validateMandatoryFields(Artifact data) {
-        if (data.getPieceNumber() == null || data.getPieceNumber().isEmpty()) {
+        if (data.getArtifactNumber() == null || data.getArtifactNumber().isEmpty()) {
             throw new MandatoryException("Nome do artefato é obrigatório");
         }
-        if (data.getPieceName() == null || data.getPieceName().isEmpty()) {
+        if (data.getArtifactName() == null || data.getArtifactName().isEmpty()) {
             throw new MandatoryException("Nome do artefato é obrigatório");
         }
-        if (data.getPieceDescription() == null || data.getPieceDescription().isEmpty()) {
+        if (data.getArtifactDescription() == null || data.getArtifactDescription().isEmpty()) {
             throw new MandatoryException("Descrição do artefato é obrigatório");
         }
         if (data.getProvenance() == null || data.getProvenance().isEmpty()) {
@@ -90,17 +90,17 @@ public class ArtifactServiceImpl implements ArtifactService {
     }
 
     private void validateBusinessLogicForInsert(Artifact data) {
-        if(Strings.isEmpty(data.getPieceNumber())){
+        if(Strings.isEmpty(data.getArtifactNumber())){
             throw new BusinessLogicException(BusinessLogicError.MANDATORY_FIELD_NOT_FOUND);
         }
-        Optional<Artifact> byNumberPiece = artifactRepository.findByPieceNumber(data.getPieceNumber());
+        Optional<Artifact> byNumberPiece = artifactRepository.findByArtifactNumber(data.getArtifactNumber());
         if(byNumberPiece.isPresent()) {
-            throw new BusinessLogicException(BusinessLogicError.NUMBER_PIECE_DUPLICATED);
+            throw new BusinessLogicException(BusinessLogicError.NUMBER_ARTIFACT_DUPLICATED);
         }
     }
 
     private void validateBusinessLogicForUpdate(Artifact data) {
-        if(data.getId() <= 0L ){
+        if(data.getArtifactId() <= 0L ){
             throw new BusinessLogicException("Id Inválido");
         }
     }
@@ -129,9 +129,9 @@ public class ArtifactServiceImpl implements ArtifactService {
     }
 
     private void updateDataDBFromUpdate(Artifact dataToUpdate, Artifact dataDB) {
-        dataDB.setPieceNumber(dataToUpdate.getPieceNumber());
-        dataDB.setPieceName(dataToUpdate.getPieceName());
-        dataDB.setPieceDescription(dataToUpdate.getPieceDescription());
+        dataDB.setArtifactNumber(dataToUpdate.getArtifactNumber());
+        dataDB.setArtifactName(dataToUpdate.getArtifactName());
+        dataDB.setArtifactDescription(dataToUpdate.getArtifactDescription());
         dataDB.setProvenance(dataToUpdate.getProvenance());
         dataDB.setCollectorDonor(dataToUpdate.getCollectorDonor());
         dataDB.setFamilyTaxon(dataToUpdate.getFamilyTaxon());

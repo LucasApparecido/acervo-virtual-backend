@@ -26,13 +26,13 @@ public class Artifact {
             generator = "artifact_sequence"
     )
     @Column(name = "Id", nullable = false)
-    private Long id;
+    private Long artifactId;
 
     @Column(name = "Numero_da_peca", length = 50, nullable = false)
-    private String pieceNumber;
+    private String artifactNumber;
 
     @Column(name = "Nome_da_Peca", length = 100, nullable = false)
-    private String pieceName;
+    private String artifactName;
 
     @Column(name = "Proveniencia", length = 100, nullable = false)
     private String provenance;
@@ -56,7 +56,7 @@ public class Artifact {
     private String collection;
 
     @Column(name = "Descricao_da_Peca", length = 500)
-    private String pieceDescription;
+    private String artifactDescription;
 
     @Column(name = "Status", nullable = false)
     private Boolean status;

@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 public class ArtifactMapper {
     public Artifact toModel(CreateArtifactDTO dto){
         Artifact a = new Artifact();
-        a.setPieceNumber(dto.getPieceNumber());
-        a.setPieceName(dto.getPieceName());
+        a.setArtifactNumber(dto.getArtifactNumber());
+        a.setArtifactName(dto.getArtifactName());
         a.setProvenance(dto.getProvenance());
         a.setCollectorDonor(dto.getCollectorDonor());
         a.setFamilyTaxon(dto.getFamilyTaxon());
@@ -18,7 +18,7 @@ public class ArtifactMapper {
         a.setLocationInCollection(dto.getLocationInCollection());
         a.setPeriodEpochAge(dto.getPeriodEpochAge());
         a.setCollection(dto.getCollection());
-        a.setPieceDescription(dto.getPieceDescription());
+        a.setArtifactDescription(dto.getArtifactDescription());
         a.setStatus(dto.getStatus());
         a.setTombingDate(dto.getTombingDate());
         a.setRegistrationDate(dto.getRegistrationDate());
@@ -26,8 +26,8 @@ public class ArtifactMapper {
     }
     public Artifact toModel(UpdateArtifactDTO dto){
         Artifact a = new Artifact();
-        a.setPieceNumber(dto.getPieceNumber());
-        a.setPieceName(dto.getPieceName());
+        a.setArtifactNumber(dto.getArtifactNumber());
+        a.setArtifactName(dto.getArtifactName());
         a.setProvenance(dto.getProvenance());
         a.setCollectorDonor(dto.getCollectorDonor());
         a.setFamilyTaxon(dto.getFamilyTaxon());
@@ -35,7 +35,7 @@ public class ArtifactMapper {
         a.setLocationInCollection(dto.getLocationInCollection());
         a.setPeriodEpochAge(dto.getPeriodEpochAge());
         a.setCollection(dto.getCollection());
-        a.setPieceDescription(dto.getPieceDescription());
+        a.setArtifactDescription(dto.getArtifactDescription());
         a.setStatus(dto.getStatus());
         a.setTombingDate(dto.getTombingDate());
         a.setRegistrationDate(dto.getRegistrationDate());

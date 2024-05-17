@@ -53,11 +53,11 @@ public class ArtifactController {
     @Operation(description = "End point para atualização de artefato")
     public ResponseEntity<Object> update(
             @RequestBody CreateArtifactDTO dto,
-            @PathVariable("id") Long id){
+            @PathVariable("id") Long artifactId){
         Artifact artifactSaved = null;
         try{
             Artifact data = mapper.toModel(dto);
-            data.setId(id);
+            data.setArtifactId(artifactId);
             artifactSaved = service.updateArtifact(data);
         }catch (MandatoryException e){
             return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED)
@@ -89,10 +89,10 @@ public class ArtifactController {
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(path = "/{id}")
     @Operation(description = "Retorna um artefato pelo seu id")
-    public ResponseEntity<Object> getById(@PathVariable("id") Long id){
-        Artifact artifact = Artifact.builder().id(0L).build();
+    public ResponseEntity<Object> getById(@PathVariable("id") Long artifactId){
+        Artifact artifact = Artifact.builder().artifactId(0L).build();
         try{
-            artifact = service.getById(id);
+            artifact = service.getById(artifactId);
         }catch (DataException de){
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Erro de dados ocorreu. Detalhe:"+de.getMessage());
@@ -112,10 +112,10 @@ public class ArtifactController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping(path = "/{id}")
-    @Operation(description = "Deleta um artefato pelo seu id")
-    public ResponseEntity<Object> delete(@PathVariable("id") Long id){
+    @Operation(description = "Deleta um artefato pelo seu artifactId")
+    public ResponseEntity<Object> delete(@PathVariable("id") Long artifactId){
         try{
-            service.deleteArtifact(id);
+            service.deleteArtifact(artifactId);
         }catch (DataException de){
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Erro de dados ocorreu. Detalhe:"+de.getMessage());

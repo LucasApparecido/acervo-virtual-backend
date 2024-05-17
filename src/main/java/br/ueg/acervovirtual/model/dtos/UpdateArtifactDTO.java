@@ -10,9 +10,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UpdateArtifactDTO {
-    private String pieceNumber;
+    private String artifactNumber;
 
-    private String pieceName;
+    private String artifactName;
 
     private String provenance;
 
@@ -28,7 +28,7 @@ public class UpdateArtifactDTO {
 
     private String collection;
 
-    private String pieceDescription;
+    private String artifactDescription;
 
     private Boolean Status;
 
