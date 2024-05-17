@@ -1,4 +1,4 @@
-package br.ueg.acervovirtual.mapper;
+/*package br.ueg.acervovirtual.mapper;
 
 import br.ueg.acervovirtual.model.GenericModel;
 import org.mapstruct.IterableMapping;
@@ -32,4 +32,4 @@ public interface GenericMapper<
     @IterableMapping(qualifiedByName = "toDTOList") // para orientar qual metodo utilizar no caso de vários target=source;
     List<DTOList> fromModelToDTOList(List<MODEL> modelList);
 }
-
+*/

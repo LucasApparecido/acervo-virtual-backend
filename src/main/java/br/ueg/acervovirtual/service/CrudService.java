@@ -1,4 +1,4 @@
-package br.ueg.acervovirtual.service;
+/*package br.ueg.acervovirtual.service;
 
 import br.ueg.progweb1.aula01.model.GenericModel;
 
@@ -14,4 +14,4 @@ public interface CrudService<
     MODEL getById(TYPE_PK id);
 
     MODEL deleteById(TYPE_PK id);
-}
+}*/

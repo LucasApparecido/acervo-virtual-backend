@@ -27,6 +27,7 @@ public class ArtifactController {
     @Autowired
     private ArtifactMapper mapper;
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping
     @Operation(description = "End point para inclusão de artefato")
     public ResponseEntity<Object> create (@RequestBody CreateArtifactDTO dto ){
@@ -47,6 +48,7 @@ public class ArtifactController {
         return ResponseEntity.ok(artifactSaved);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping(path = "/{id}")
     @Operation(description = "End point para atualização de artefato")
     public ResponseEntity<Object> update(
@@ -70,6 +72,7 @@ public class ArtifactController {
         return ResponseEntity.ok(artifactSaved);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping
     @Operation(description = "Lista todos os artefatos registrados")
     public ResponseEntity<List<Artifact>> listAllArtifacts() {
@@ -83,6 +86,7 @@ public class ArtifactController {
         return ResponseEntity.of(Optional.ofNullable(artifactList));
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping(path = "/{id}")
     @Operation(description = "Retorna um artefato pelo seu id")
     public ResponseEntity<Object> getById(@PathVariable("id") Long id){
@@ -106,6 +110,7 @@ public class ArtifactController {
         return ResponseEntity.of(Optional.ofNullable(service.getOrderByCollectionYear()));
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @DeleteMapping(path = "/{id}")
     @Operation(description = "Deleta um artefato pelo seu id")
     public ResponseEntity<Object> delete(@PathVariable("id") Long id){

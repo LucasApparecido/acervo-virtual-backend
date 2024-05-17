@@ -1,4 +1,4 @@
-package br.ueg.acervovirtual.service.impl;
+/*package br.ueg.acervovirtual.service.impl;
 
 import br.ueg.acervovirtual.exceptions.DataException;
 import br.ueg.acervovirtual.mapper.GenericUpdateMapper;
@@ -104,3 +104,4 @@ public abstract class GenericCrudService<
     protected abstract void validateMandatoryFields(MODEL dado);
 }
 
+*/
