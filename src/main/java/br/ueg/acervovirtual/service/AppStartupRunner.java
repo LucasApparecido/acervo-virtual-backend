@@ -32,22 +32,24 @@ public class AppStartupRunner implements ApplicationRunner {
         if(!this.ddlAuto.equalsIgnoreCase(CREATE_DROP)){
             return;
         }
-        Artifact artifact = Artifact.builder()
-                .artifactNumber("123456")
-                .artifactName("Peça 1")
-                .provenance("Proveniencia 1")
-                .collectorDonor("Coletor 1")
-                .familyTaxon("Familia 1")
-                .collectionYear(2021)
-                .locationInCollection("Localização 1")
-                .periodEpochAge("Periodo 1")
-                .collection("Coleção 1")
-                .artifactDescription("Descrição 1")
-                .status(true)
-                .tombingDate(LocalDate.of(2021, Month.JANUARY, 1))
-                .registrationDate(LocalDate.now())
-                .build();
-        this.artifactRepository.save(artifact);
+        for(int index = 1; index <= 100; index++){
+            Artifact artifact = Artifact.builder()
+                    .artifactNumber(Integer.toString(index))
+                    .artifactName("Peça " + index)
+                    .provenance("Proveniencia " + index)
+                    .collectorDonor("Coletor " + index)
+                    .familyTaxon("Familia " + index)
+                    .collectionYear(2021)
+                    .locationInCollection("Localização " + index)
+                    .periodEpochAge("Periodo " + index)
+                    .collection("Coleção " + index)
+                    .artifactDescription("Descrição " + index)
+                    .status(true)
+                    .tombingDate(LocalDate.of(2024, Month.JANUARY, 1))
+                    .registrationDate(LocalDate.now())
+                    .build();
+            this.artifactRepository.save(artifact);
+        }
         LOG.info("Fim da execução");
     }
 
