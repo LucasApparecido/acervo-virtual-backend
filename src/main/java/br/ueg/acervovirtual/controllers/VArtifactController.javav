@@ -1,0 +1,128 @@
+package br.ueg.acervovirtual.controllers;
+
+import br.ueg.acervovirtual.exceptions.BusinessLogicException;
+import br.ueg.acervovirtual.exceptions.DataException;
+import br.ueg.acervovirtual.exceptions.MandatoryException;
+import br.ueg.acervovirtual.model.Artifact;
+import br.ueg.acervovirtual.model.dtos.ArtifactDTO;
+import br.ueg.acervovirtual.service.ArtifactService;
+import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping(path = "${api.version}/artefacts")
+public class VArtifactController {
+
+    @Autowired
+    private ArtifactService service;
+
+    @Autowired
+    private ArtifactMapper mapper;
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping
+    @Operation(description = "End point para inclusão de artefato")
+    public ResponseEntity<Object> create (@RequestBody CreateArtifactDTO dto ){
+        V1Artifact v1ArtifactSaved = null;
+        try{
+            V1Artifact v1ArtifactModel = mapper.toModel(dto);
+            v1ArtifactSaved = service.createArtifact(v1ArtifactModel);
+        }catch (MandatoryException e){
+            return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED)
+                    .body("Erro: " + e.getMessage());
+        }catch (BusinessLogicException e){
+            return ResponseEntity.status(HttpStatus.PRECONDITION_REQUIRED)
+                    .body("Erro:"+e.getMessage());
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Erro: desconhecido aconteceu:" + e.getMessage());
+        }
+        return ResponseEntity.ok(v1ArtifactSaved);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PutMapping(path = "/{id}")
+    @Operation(description = "End point para atualização de artefato")
+    public ResponseEntity<Object> update(
+            @RequestBody CreateArtifactDTO dto,
+            @PathVariable("id") Long artifactId){
+        V1Artifact v1ArtifactSaved = null;
+        try{
+            V1Artifact data = mapper.toModel(dto);
+            data.setArtifactId(artifactId);
+            v1ArtifactSaved = service.updateArtifact(data);
+        }catch (MandatoryException e){
+            return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED)
+                    .body("Erro: " + e.getMessage());
+        }catch (BusinessLogicException e){
+            return ResponseEntity.status(HttpStatus.PRECONDITION_REQUIRED)
+                    .body("Erro:"+e.getMessage());
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Erro: desconhecido aconteceu:" + e.getMessage());
+        }
+        return ResponseEntity.ok(v1ArtifactSaved);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping
+    @Operation(description = "Lista todos os artefatos registrados")
+    public ResponseEntity<List<V1Artifact>> listAllArtifacts() {
+        List<V1Artifact> v1ArtifactList = new ArrayList<>();
+        try{
+            v1ArtifactList = service.listALLArtifacts();
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(400).build();
+        }
+        return ResponseEntity.of(Optional.ofNullable(v1ArtifactList));
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping(path = "/{id}")
+    @Operation(description = "Retorna um artefato pelo seu id")
+    public ResponseEntity<Object> getById(@PathVariable("id") Long artifactId){
+        V1Artifact v1Artifact = V1Artifact.builder().artifactId(0L).build();
+        try{
+            v1Artifact = service.getById(artifactId);
+        }catch (DataException de){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Erro de dados ocorreu. Detalhe:"+de.getMessage());
+        }
+        catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Erro: desconhecido aconteceu:"+e.getMessage());
+        }
+        return ResponseEntity.ok(v1Artifact);
+    }
+
+    @GetMapping(path = "/collectionYear")
+    @Operation(description = "Lista todos os artefatos por ano de coleta")
+    public ResponseEntity<List<V1Artifact>> listOrderByCollectionYear(){
+        return ResponseEntity.of(Optional.ofNullable(service.getOrderByCollectionYear()));
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @DeleteMapping(path = "/{id}")
+    @Operation(description = "Deleta um artefato pelo seu artifactId")
+    public ResponseEntity<Object> delete(@PathVariable("id") Long artifactId){
+        try{
+            service.deleteArtifact(artifactId);
+        }catch (DataException de){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Erro de dados ocorreu. Detalhe:"+de.getMessage());
+        }
+        catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Erro: desconhecido aconteceu:"+e.getMessage());
+        }
+        return ResponseEntity.ok().build();
+    }
+}

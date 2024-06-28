@@ -7,50 +7,45 @@ import br.ueg.acervovirtual.model.Artifact;
 import br.ueg.acervovirtual.repository.ArtifactRepository;
 import br.ueg.acervovirtual.service.ArtifactService;
 import org.apache.logging.log4j.util.Strings;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 @Service
-public class ArtifactServiceImpl implements ArtifactService {
-
-    @Autowired
-    private ArtifactRepository artifactRepository;
+public class ArtifactServiceImpl extends GenericCrudService<Artifact, Long, ArtifactRepository> implements ArtifactService {
 
     @Override
-    public List<Artifact> listALLArtifacts(){
-        return artifactRepository.findAll();
+    protected void prepareToCreate(Artifact data) {
+
     }
 
     @Override
-    public Artifact createArtifact(Artifact data) {
-        prepareToCreate(data);
-        validateMandatoryFields(data);
-        validateBusinessLogicForInsert(data);
-        return artifactRepository.save(data);
+    protected void validateBusinessLogicForInsert(Artifact data) {
+        if (Strings.isEmpty(data.getArtifactNumber())) {
+            throw new BusinessLogicException(BusinessLogicError.MANDATORY_FIELD_NOT_FOUND);
+        }
+        Optional<Artifact> byArtifactNumber = repository.findByArtifactNumber(data.getArtifactNumber());
+        if (byArtifactNumber.isPresent()) {
+            throw new BusinessLogicException(BusinessLogicError.NUMBER_ARTIFACT_DUPLICATED);
+        }
+    }
+
+
+    @Override
+    protected void validateBusinessLogicForUpdate(Artifact data) {
+        if(data.getId() <= 0L ){
+            throw new BusinessLogicException("Id Inválido");
+        }
     }
 
     @Override
-    public Artifact updateArtifact(Artifact dataToUpdate) {
-        var dataDB = validateIdArtifactExists(dataToUpdate.getArtifactId());
-        validateMandatoryFields(dataToUpdate);
-        validateBusinessLogicForUpdate(dataToUpdate);
-        updateDataDBFromUpdate(dataToUpdate, dataDB);
-        return artifactRepository.save(dataDB);
+    protected void validateBusinessLogic(Artifact data) {
+
     }
 
     @Override
-    public Artifact getById(Long id) {
-        return this.validateIdArtifactExists(id);
-    }
-
-    private void prepareToCreate(Artifact data) {
-        data.setArtifactId(null);
-    }
-
-    //Talvez um switch case com todos os campos, vale a duvida mais tarde com o professor
-    private void validateMandatoryFields(Artifact data) {
+    protected void validateMandatoryFields(Artifact data) {
         if (data.getArtifactNumber() == null || data.getArtifactNumber().isEmpty()) {
             throw new MandatoryException("Nome do artefato é obrigatório");
         }
@@ -84,71 +79,5 @@ public class ArtifactServiceImpl implements ArtifactService {
         if (data.getTombingDate() == null) {
             throw new MandatoryException("Data de tombamento do artefato é obrigatório");
         }
-    }
-
-    private void validateBusinessLogicForInsert(Artifact data) {
-        if(Strings.isEmpty(data.getArtifactNumber())){
-            throw new BusinessLogicException(BusinessLogicError.MANDATORY_FIELD_NOT_FOUND);
-        }
-        Optional<Artifact> byNumberPiece = artifactRepository.findByArtifactNumber(data.getArtifactNumber());
-        if(byNumberPiece.isPresent()) {
-            throw new BusinessLogicException(BusinessLogicError.NUMBER_ARTIFACT_DUPLICATED);
-        }
-    }
-
-    private void validateBusinessLogicForUpdate(Artifact data) {
-        if(data.getArtifactId() <= 0L ){
-            throw new BusinessLogicException("Id Inválido");
-        }
-    }
-
-    private Artifact internalGetById(Long id) {
-
-        Optional<Artifact> byId = artifactRepository.findById(id);
-        return byId.orElse(null);
-    }
-    private Artifact validateIdArtifactExists(Long id) {
-        boolean valid = true;
-        Artifact dataDB = null;
-
-        if(Objects.nonNull(id)) {
-            dataDB = this.internalGetById(id);
-            if (dataDB == null) {
-                valid = false;
-            }
-        }else{
-            valid = false;
-        }
-        if(Boolean.FALSE.equals(valid)){
-            throw new BusinessLogicException("Artefato não existe");
-        }
-        return dataDB;
-    }
-
-    private void updateDataDBFromUpdate(Artifact dataToUpdate, Artifact dataDB) {
-        dataDB.setArtifactNumber(dataToUpdate.getArtifactNumber());
-        dataDB.setArtifactName(dataToUpdate.getArtifactName());
-        dataDB.setArtifactDescription(dataToUpdate.getArtifactDescription());
-        dataDB.setProvenance(dataToUpdate.getProvenance());
-        dataDB.setCollectorDonor(dataToUpdate.getCollectorDonor());
-        dataDB.setFamilyTaxon(dataToUpdate.getFamilyTaxon());
-        dataDB.setCollectionYear(dataToUpdate.getCollectionYear());
-        dataDB.setLocationInCollection(dataToUpdate.getLocationInCollection());
-        dataDB.setPeriodEpochAge(dataToUpdate.getPeriodEpochAge());
-        dataDB.setCollection(dataToUpdate.getCollection());
-        dataDB.setStatus(dataToUpdate.getStatus());
-    }
-
-    @Override
-    public List<Artifact> getOrderByCollectionYear() {
-        Optional<List<Artifact>> byCollectionYear = Optional.ofNullable(artifactRepository.findOrderByCollectionYear());
-        return byCollectionYear.get();
-    }
-
-    @Override
-    public Artifact deleteArtifact(Long id) {
-        Artifact artifact = this.validateIdArtifactExists(id);
-        artifactRepository.delete(artifact);
-        return artifact;
     }
 }

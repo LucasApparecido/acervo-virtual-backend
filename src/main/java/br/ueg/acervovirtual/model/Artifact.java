@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.time.LocalDate;
 
+import static jakarta.persistence.GenerationType.SEQUENCE;
+
 @Getter
 @Setter
 @ToString
@@ -13,20 +15,21 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "ARTEFATO")
-public class Artifact {
+public class Artifact implements GenericModel<Long> {
+    public final static String SEQUENCE_NAME = "artifact_sequence";//Mude o nome para criar outro
 
     @Id
     @SequenceGenerator(
-            name = "artifact_sequence",
-            sequenceName = "artifact_sequence",
+            name=SEQUENCE_NAME,
+            sequenceName = SEQUENCE_NAME+"_bd",
             allocationSize = 1
     )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "artifact_sequence"
+            strategy = SEQUENCE,
+            generator = SEQUENCE_NAME
     )
     @Column(name = "Id", nullable = false)
-    private Long artifactId;
+    private Long Id;
 
     @Column(name = "Numero_da_peca", length = 50, nullable = false)
     private String artifactNumber;

@@ -1,44 +1,24 @@
 package br.ueg.acervovirtual.mapper;
 
 import br.ueg.acervovirtual.model.Artifact;
-import br.ueg.acervovirtual.model.dtos.CreateArtifactDTO;
-import br.ueg.acervovirtual.model.dtos.UpdateArtifactDTO;
-import org.springframework.stereotype.Component;
+import br.ueg.acervovirtual.model.dtos.ArtifactDataDTO;
+import br.ueg.acervovirtual.model.dtos.ArtifactDTO;
+import br.ueg.acervovirtual.model.dtos.ArtifactListDTO;
+import org.mapstruct.Mapper;
+import org.mapstruct.NullValueCheckStrategy;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
-@Component
-public class ArtifactMapper {
-    public Artifact toModel(CreateArtifactDTO dto){
-        Artifact a = new Artifact();
-        a.setArtifactNumber(dto.getArtifactNumber());
-        a.setArtifactName(dto.getArtifactName());
-        a.setProvenance(dto.getProvenance());
-        a.setCollectorDonor(dto.getCollectorDonor());
-        a.setFamilyTaxon(dto.getFamilyTaxon());
-        a.setCollectionYear(dto.getCollectionYear());
-        a.setLocationInCollection(dto.getLocationInCollection());
-        a.setPeriodEpochAge(dto.getPeriodEpochAge());
-        a.setCollection(dto.getCollection());
-        a.setArtifactDescription(dto.getArtifactDescription());
-        a.setStatus(dto.getStatus());
-        a.setTombingDate(dto.getTombingDate());
-        a.setRegistrationDate(dto.getRegistrationDate());
-        return a;
-    }
-    public Artifact toModel(UpdateArtifactDTO dto){
-        Artifact a = new Artifact();
-        a.setArtifactNumber(dto.getArtifactNumber());
-        a.setArtifactName(dto.getArtifactName());
-        a.setProvenance(dto.getProvenance());
-        a.setCollectorDonor(dto.getCollectorDonor());
-        a.setFamilyTaxon(dto.getFamilyTaxon());
-        a.setCollectionYear(dto.getCollectionYear());
-        a.setLocationInCollection(dto.getLocationInCollection());
-        a.setPeriodEpochAge(dto.getPeriodEpochAge());
-        a.setCollection(dto.getCollection());
-        a.setArtifactDescription(dto.getArtifactDescription());
-        a.setStatus(dto.getStatus());
-        a.setTombingDate(dto.getTombingDate());
-        a.setRegistrationDate(dto.getRegistrationDate());
-        return a;
-    }
+@Mapper(
+        componentModel = "spring",
+        nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS,
+        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE
+)
+public interface ArtifactMapper extends GenericMapper<
+        ArtifactDTO, // DTO Geral
+        ArtifactDataDTO, // DTO Create
+        ArtifactDataDTO, // DTO Update
+        ArtifactListDTO, // DTO List
+        Artifact, // Model
+        Long // PK_TYPE
+        > {
 }

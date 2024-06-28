@@ -9,7 +9,8 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateArtifactDTO {
+public class ArtifactDataDTO {
+
     private String artifactNumber;
 
     private String artifactName;

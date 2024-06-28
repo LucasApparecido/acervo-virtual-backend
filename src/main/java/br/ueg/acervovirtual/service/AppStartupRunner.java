@@ -33,6 +33,7 @@ public class AppStartupRunner implements ApplicationRunner {
             return;
         }
         Artifact artifact = Artifact.builder()
+                .Id(1L)
                 .artifactNumber("123456")
                 .artifactName("Peça 1")
                 .provenance("Proveniencia 1")
